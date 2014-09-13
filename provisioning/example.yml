@@ -3,8 +3,8 @@
   sudo: no
 
   roles:
-   - pass_key
+#   - pass_key
    - zsh
-   - python
-   - project
-   - start
+   - pythonbrew
+#   - project
+#   - start

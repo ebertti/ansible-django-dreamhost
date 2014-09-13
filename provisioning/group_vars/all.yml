@@ -1,10 +1,12 @@
-user: {{ ansible_ssh_user }}
+user: '{{ ansible_ssh_user }}'
 home: '/home/{{ user }}'
 python_version: '2.7.7'
-python: '{{home}}/.pythonbrew/pythons/Python-{{ python_version }}/bin/python'
-pip: '{{home}}/.pythonbrew/pythons/Python-{{ python_version }}/bin/python'
+pythonbrew_version: '1.3.5'
+pythonbrew_location: '{{ home }}/.pythonbrew'
+python: '{{ pythonbrew_location }}/pythons/Python-{{ python_version }}/bin/python'
+pip: '{{ pythonbrew_location }}/pythons/Python-{{ python_version }}/bin/python'
 profile: '{{ home }}/.zshrc'
 repo_dir: '{{ home }}/{{ site_url }}'
 public_dir: '{{ repo_dir }}/public'
 
-zsh_theme: juanghurtado
+zsh_theme: 'juanghurtado'
