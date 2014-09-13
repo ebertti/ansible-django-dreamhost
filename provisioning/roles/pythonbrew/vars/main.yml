@@ -1,0 +1,5 @@
+temp_file: "pythonbrew-{{ pythonbrew_version }}"
+temp_tarball: "{{ temp_file }}.tar.gz"
+path_dists: "{{ home }}/dists"
+path_downloads: '{{ path_dists }}/{{ temp_tarball }}'
+path_temps: '{{ path_dists }}/{{ temp_file }}'

@@ -1,0 +1,26 @@
+
+  - name: remove old instalations
+    file: path={{ item }} state=absent
+    with_items:
+      - '{{ path_dists }}'
+      - '{{ pythonbrew_location }}'
+
+  - name: create dir to download
+    command: mkdir -p {{ path_dists }}
+
+  - name: download
+    get_url: url=http://pypi.python.org/packages/source/p/pythonbrew/{{ temp_tarball  }} dest={{ path_dists }}/{{ temp_tarball }}
+
+  - name: extraction
+    command: tar zxf {{ path_dists }}/{{ temp_tarball }} -C {{ path_dists }}
+
+  - name: install
+    command: python {{ path_dists }}/{{ temp_file }}/pythonbrew_install.py
+
+  - name: Update bashrc for PythonBrew
+    lineinfile:
+        dest={{ profile }}
+        regexp='^'
+        line='[[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc'
+        state=present
+        create=True

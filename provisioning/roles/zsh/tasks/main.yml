@@ -1,13 +1,16 @@
-  tasks:
+
+  - name: remove old instalation
+    file: path={{ home }}/.oh-my-zsh state=absent
+    tags:
+     - shell
 
   - name: Clone oh-my-zsh repo
     git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest={{ home }}/.oh-my-zsh
     tags:
      - shell
 
-
   - name: copy template file of oh-my-zsh to be your profile
-    copy: src={{ home }}/.oh-my-zsh/templates/zshrc.zsh-template dest={{ profile }}
+    command: cp {{ home }}/.oh-my-zsh/templates/zshrc.zsh-template {{ profile }}
     tags:
       - shell
 

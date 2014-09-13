@@ -1,0 +1,6 @@
+
+  - name: download and install
+    shell: $"{{pythonbrew_exe}}" install {{ python_version }}
+
+  - name: use python
+    shell: $"{{pythonbrew_exe}}" use {{ python_version }}

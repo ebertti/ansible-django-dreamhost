@@ -1,5 +1,3 @@
-  tasks:
-
   - name: add RSA key to ssh connection
     authorized_key: user='{{ user }}' key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
     tags:
