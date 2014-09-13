@@ -1,0 +1,17 @@
+  tasks:
+
+  - name: add RSA key to ssh connection
+    authorized_key: user='{{ user }}' key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    tags:
+     - ssh-key
+
+  - name: copy RSA key to clone git repository - public key
+    copy: src=ssh_keys dest={{profile}}/.ssh
+    tags:
+     - ssh-key
+
+  - name: change chmod of .ssh
+    command: chmod 700 {{ profile }}/.ssh && chmod 600 {{ profile }}/.ssh/*
+    tags:
+     - ssh-key
+

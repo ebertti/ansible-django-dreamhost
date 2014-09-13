@@ -1,0 +1,17 @@
+  tasks:
+
+  - name: Clone oh-my-zsh repo
+    git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest={{ home }}/.oh-my-zsh
+    tags:
+     - shell
+
+
+  - name: copy template file of oh-my-zsh to be your profile
+    copy: src={{ home }}/.oh-my-zsh/templates/zshrc.zsh-template dest={{ profile }}
+    tags:
+      - shell
+
+  - name: set theme for oh my zsh
+    replace: dest={{ profile }} regexp='robbyrussell' replace={{ zsh_theme }}
+    tags:
+      - shell

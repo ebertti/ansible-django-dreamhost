@@ -1,0 +1,2 @@
+[example]
+yourdomain.com ansible_ssh_user=yoursshuser ansible_ssh_pass=yoursshuserpass

@@ -1,0 +1,10 @@
+user: {{ ansible_ssh_user }}
+home: '/home/{{ user }}'
+python_version: '2.7.7'
+python: '{{home}}/.pythonbrew/pythons/Python-{{ python_version }}/bin/python'
+pip: '{{home}}/.pythonbrew/pythons/Python-{{ python_version }}/bin/python'
+profile: '{{ home }}/.zshrc'
+repo_dir: '{{ home }}/{{ site_url }}'
+public_dir: '{{ repo_dir }}/public'
+
+zsh_theme: juanghurtado

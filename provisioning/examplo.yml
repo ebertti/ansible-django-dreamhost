@@ -1,0 +1,10 @@
+- hosts: example
+  user: example
+  sudo: no
+
+  roles:
+   - pass_key
+   - zsh
+   - python
+   - project
+   - start
