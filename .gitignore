@@ -1,6 +1,6 @@
 # Created by .gitignore support plugin (hsz.mobi)
 
+.idea
 .vagrant
 id_rsa
 id_rsa.pub
-.idea
