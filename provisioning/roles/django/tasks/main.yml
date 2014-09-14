@@ -3,7 +3,10 @@
    template: src=settings_local.py.j2 dest={{ repo_dir }}/{{ project_name }}/settings_local.py
 
  - name: collect static
-   shell: $'{{ python }}' {{ repo_dir }}/manage.py collectstatic
+   shell: $'{{ python }}' {{ repo_dir }}/manage.py collectstatic --noinput
 
  - name: migrate database
-   shell: $'{{ python }}' {{ repo_dir }}/manage.py migrate
+   shell: $'{{ python }}' {{ repo_dir }}/manage.py migrate --noinput
+
+ #- name: kill python to restart site todo:ainda n funciona
+ #  shell: pkill {{ python }}

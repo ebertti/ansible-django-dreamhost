@@ -5,5 +5,17 @@
   - name: use python
     shell: $"{{ pythonbrew_exe }}" use {{ python_version }}
 
+  - name: create cache for pip
+    file: path={{home}}/.pip state=directory
+
+  - name: create pip.conf
+    copy: src=pip.conf dest={{home}}/.pip/pip.conf
+
+  - name: update pip and setuptools
+    shell: $"{{ pip }}" install {{ item }} --upgrade
+    with_items:
+      - setuptools
+      - pip
+
   - name: install requirements.txt
-    shell: $"{{ pip }}" -r {{ repo_dir }}/requeriments.txt
+    shell: $"{{ pip }}" install -r {{ repo_dir }}/requirements.txt
