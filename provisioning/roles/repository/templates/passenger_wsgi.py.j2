@@ -1,0 +1,39 @@
+#!{{ python }}
+from logging.handlers import RotatingFileHandler
+import sys
+import os
+import logging
+
+INTERP = "{{ python }}"
+if sys.executable != INTERP:
+    os.execl(INTERP, INTERP, *sys.argv)
+
+my_logger = logging.getLogger('root')
+my_logger.setLevel(logging.ERROR)
+handler = RotatingFileHandler(
+    os.path.join(os.getcwd(), 'log/passenger_wsgi.log'),
+    maxBytes=10000,
+    backupCount=5
+)
+my_logger.addHandler(handler)
+
+my_logger.info("Running %s", sys.executable)
+
+sys.path.append(os.getcwd() + '/{{ project_name }}')
+os.environ['DJANGO_SETTINGS_MODULE'] = "{{ project_name }}.settings"
+
+from django.core.wsgi import get_wsgi_application
+wsgi_application = get_wsgi_application()
+
+
+def application(environ, start_response):
+    my_logger.info("Rsquest INIT: %s %s", environ['REQUEST_METHOD'], environ['PATH_INFO'], )
+    my_logger.debug("Environ: %s", str(environ))
+    results = []
+    try:
+        results = wsgi_application(environ, start_response)
+    except Exception, inst:
+        my_logger.exception("Request Error: %s %s %s", str(type(inst)), environ['REQUEST_METHOD'], environ['PATH_INFO'])
+    else:
+        my_logger.info("Request DONE: %s %s", environ['REQUEST_METHOD'], environ['PATH_INFO'])
+    return results

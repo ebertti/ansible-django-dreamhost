@@ -1,15 +1,20 @@
   - name: add RSA key to ssh connection
-    authorized_key: user='{{ user }}' key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    authorized_key: user='{{ user }}' key="{{ lookup('file', 'my_key.pub') }}"
     tags:
      - ssh-key
 
   - name: copy RSA key to clone git repository - public key
-    copy: src=ssh_keys dest={{profile}}/.ssh
+    copy: src=ssh_keys/ dest={{ home }}/.ssh/
     tags:
      - ssh-key
 
   - name: change chmod of .ssh
-    command: chmod 700 {{ profile }}/.ssh && chmod 600 {{ profile }}/.ssh/*
+    file: dest={{ home }}/.ssh mode=764
+    tags:
+     - ssh-key
+
+  - name: change chmod of .ssh/id_rsa
+    file: dest={{ home }}/.ssh/id_rsa mode=600
     tags:
      - ssh-key
 

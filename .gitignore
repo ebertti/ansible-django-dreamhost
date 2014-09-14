@@ -4,4 +4,5 @@
 .vagrant
 id_rsa
 id_rsa.pub
+my_key.pub
 hosts

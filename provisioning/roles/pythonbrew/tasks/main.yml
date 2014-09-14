@@ -3,7 +3,7 @@
     file: path={{ item }} state=absent
     with_items:
       - '{{ path_dists }}'
-      - '{{ pythonbrew_location }}'
+      - '{{ pythonbrew_dir }}'
 
   - name: create dir to download
     command: mkdir -p {{ path_dists }}
