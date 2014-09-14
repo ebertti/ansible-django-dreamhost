@@ -1,10 +1,21 @@
 - hosts: example
   sudo: no
 
+  vars:
+   - site_url: 'yourdomain.com'
+   - git_repo: 'git@bitbucket.org:YOURUSER/YOURPROJECT.git'
+   - project_name: 'project_name'
+   - static_root: 'etc/public'
+   - db:
+       user: 'db_user'
+       password: 'db_user_pass'
+       name: 'db_name'
+       host: 'mysql.yourdomain.com'
+
   roles:
-#   - pass_key
-#   - zsh
-#   - pythonbrew
+   - pass_key
+   - zsh
+   - pythonbrew
+   - repository
    - python
-#   - project
-#   - start
+    - django
