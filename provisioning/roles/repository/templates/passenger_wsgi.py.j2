@@ -13,7 +13,7 @@ my_logger.setLevel(logging.ERROR)
 handler = RotatingFileHandler(
     os.path.join(os.getcwd(), 'log/passenger_wsgi.log'),
     maxBytes=10000,
-    backupCount=5
+    backupCount=2
 )
 my_logger.addHandler(handler)
 
