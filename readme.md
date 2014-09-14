@@ -21,6 +21,7 @@ Installing
 - run: vagrant up
 - ssh to vagrant image 
 - cd /vagrant
+- add private key, id_rsa, id_rsa.pub and my_key to clone project from git
 - add your host, user, pass on file ansible/hosts
 - run: ansible_playbook provisioning/example.yml 
 
