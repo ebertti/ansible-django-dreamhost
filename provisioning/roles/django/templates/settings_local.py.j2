@@ -13,6 +13,11 @@ ALLOWED_HOSTS = ['{{ site_url }}']
 
 DEVSERVER_MODULES = ()
 
+MEDIA_URL = '{{ media_url }}'
+MEDIA_ROOT = '{{ media_dir }}'
+STATIC_URL = '{{ static_url }}'
+STATIC_ROOT = '{{ static_dir }}'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

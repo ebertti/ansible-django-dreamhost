@@ -1,0 +1,26 @@
+
+  - name: create log dir for passenger
+    file: path={{site_dir}}/log state=directory
+
+  - name: remove public folder
+    file: path={{ public_dir }} state=absent
+
+  - name: recreate public folder
+    file: path={{ public_dir }} state=directory
+
+  - name: create passenger_wsgi
+    template: src=passenger_wsgi.py.j2 dest={{ site_dir }}/passenger_wsgi.py
+
+  - name: create folder for cgi-bin
+    file: dest={{ public_dir }}/cgi-bin state=directory
+
+  - name: create push.cgi for autodeploy when the code is change on repository (dont forget to create a webhook)
+    template: src=push.cgi.j2 dest={{ public_dir }}/cgi-bin/push.cgi mode=0777
+
+  - name: link favicon if favicon_path is provided
+    file: path={{ public_dir }}/favicon.ico src={{ repo_dir }}{{ favicon_path }} state=link
+    when: favicon_path is defined
+
+  - name: link robots.txt if favicon_path is provided
+    file: path={{ public_dir }}/robots.txt src={{ repo_dir }}{{ robots_path }} state=link
+    when: robots_path is defined

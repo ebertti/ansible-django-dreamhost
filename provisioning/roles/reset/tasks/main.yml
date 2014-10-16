@@ -1,0 +1,22 @@
+
+ - name: remove venv
+   file: dest={{ venv }} state=absent
+
+ - name: remove zsh
+   file: dest={{ item }} state=absent
+   with_items:
+     - "{{ profile }}"
+     - "{{ oh_my_zsh }}"
+
+ - stat: path={{ media_dir }}
+   register: exist_media_dir
+
+ - name: backup files of website
+   shell: zip -r {{ backup_media_path }} {{ media_dir }}
+   when: exist_media_dir.stat.isdir == true
+
+ - name: link last backup media file
+   file: dest={{ backup_media_path_link }} src={{ backup_media_path }} state=link
+
+ - name: remove repository repository
+   file: dest={{ repo_dir }} state=absent

@@ -5,7 +5,7 @@
      - shell
 
   - name: Clone oh-my-zsh repo
-    git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest={{ home }}/.oh-my-zsh
+    git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest={{ oh_my_zsh }}
     tags:
      - shell
 

@@ -1,9 +1,18 @@
 
-  - name: download and install
-    shell: $"{{ pythonbrew_exe }}" install {{ python_version }}
+  - name: download virtual-evn package
+    get_url: url=https://pypi.python.org/packages/source/v/virtualenv/virtualenv-1.11.6.tar.gz dest={{ home }}/virtualenv.tag.gz
 
-  - name: use python
-    shell: $"{{ pythonbrew_exe }}" use {{ python_version }}
+  - name: untar virtualenv package
+    unarchive: src={{ home }}/virtualenv.tag.gz dest={{ home }}/ copy=no
+
+  - name: create virtualenv on home
+    shell: python {{ home }}/virtualenv-1.11.6/virtualenv.py {{ venv }}
+
+  - name: remove virtualenv package
+    file: dest={{ item }} state=absent
+    with_items:
+      - "{{ home }}/virtualenv"
+      - "{{ home }}/virtualenv.tag.gz"
 
   - name: create cache for pip
     file: path={{home}}/.pip state=directory
@@ -12,10 +21,11 @@
     copy: src=pip.conf dest={{home}}/.pip/pip.conf
 
   - name: update pip and setuptools
-    shell: $"{{ pip }}" install {{ item }} --upgrade
+    pip: name={{ item }} virtualenv={{ venv }} extra_args='--upgrade'
     with_items:
       - setuptools
       - pip
 
   - name: install requirements.txt
-    shell: $"{{ pip }}" install -r {{ repo_dir }}/requirements.txt
+    pip: requirements={{ repo_dir }}/requirements.txt virtualenv={{ venv }}
+

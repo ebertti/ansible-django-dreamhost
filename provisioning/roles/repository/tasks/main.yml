@@ -5,14 +5,3 @@
       version=master
       accept_hostkey=True
 
-  - name: remote public folder
-    file: path={{ public_dir }}  state=absent
-
-  - name: create symlink with public folder
-    file: path={{ public_dir }} src={{ repo_public_dir }} state=link
-
-  - name: create log dir for passenger
-    file: path={{site_dir}}/log state=directory
-
-  - name: create passenger_wsgi
-    template: src=passenger_wsgi.py.j2 dest={{ site_dir }}/passenger_wsgi.py
