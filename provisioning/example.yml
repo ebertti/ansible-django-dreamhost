@@ -5,7 +5,7 @@
    - site_url: 'yourdomain.com'
    - git_repo: 'git@bitbucket.org:YOURUSER/YOURPROJECT.git'
    - project_name: 'project_name'
-   - static_root: 'etc/public'
+
    - db:
        user: 'db_user'
        password: 'db_user_pass'
@@ -14,8 +14,9 @@
 
   roles:
    - pass_key
+   - reset
    - zsh
-   - pythonbrew
    - repository
    - python
    - django
+   - finally
